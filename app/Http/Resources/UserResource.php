@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'role' => $this->role,
-            'profile_photo_path' => $this->profile_photo_path,
+            'profile_photo_path' => config('app.url') . $this->profile_photo_path,
         ];
     }
 }
