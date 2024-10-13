@@ -127,7 +127,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Password reset link sent successfully',
-            'url_reset' => '/api/auth/reset-password/' . $token . '?email=' . $user->email
+            'url_reset' => '/api/auth/reset-password/' . '?token=' . $token . '&email=' . $user->email
         ], 200);
     }
 

@@ -1,0 +1,1422 @@
+openapi: 3.0.3
+info:
+  title: laravel-restfull-api
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://127.0.0.1:800
+  - url: http://127.0.0.1
+paths:
+  /api/auth/register:
+    post:
+      summary: Register
+      description: Register
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john_doe@mail.com
+                name:
+                  type: string
+                  example: John doe
+                password:
+                  type: string
+                  example: "12345678"
+                password_confirmation:
+                  type: string
+                  example: "12345678"
+                username:
+                  type: string
+                  example: johndoe123
+            example:
+              email: john_doe@mail.com
+              name: John doe
+              password: "12345678"
+              password_confirmation: "12345678"
+              username: johndoe123
+      responses:
+        "201":
+          description: Success registered
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:30:12 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        example: john_doe@mail.com
+                      id:
+                        type: string
+                        example: 9d3c5f39-6f66-43c4-b89f-6d9bbf2fcea9
+                      name:
+                        type: string
+                        example: John doe
+                      profile_photo_path:
+                        type: string
+                        example: http://127.0.0.1:8000
+                      role:
+                        nullable: true
+                        example: null
+                      username:
+                        type: string
+                        example: johndoe123
+                  message:
+                    type: string
+                    example: Registered successfully and logged in
+                  success:
+                    type: boolean
+                    example: true
+                  token:
+                    type: string
+                    example: 18|etUQXJpCLQnHjk1G7qQcVmC9dTZvfyY8DnpRj61Sd38fc84c
+                  token_type:
+                    type: string
+                    example: Bearer
+              examples:
+                Success registered:
+                  value:
+                    data:
+                      email: john_doe@mail.com
+                      id: 9d3c5f39-6f66-43c4-b89f-6d9bbf2fcea9
+                      name: John doe
+                      profile_photo_path: http://127.0.0.1:8000
+                      role: null
+                      username: johndoe123
+                    message: Registered successfully and logged in
+                    success: true
+                    token: 18|etUQXJpCLQnHjk1G7qQcVmC9dTZvfyY8DnpRj61Sd38fc84c
+                    token_type: Bearer
+        "422":
+          description: "Error validation: has user exist"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:31:45 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                          example: The email has already been taken.
+                        example:
+                          - The email has already been taken.
+                      username:
+                        type: array
+                        items:
+                          type: string
+                          example: The username has already been taken.
+                        example:
+                          - The username has already been taken.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error validation: has user exist":
+                  value:
+                    errors:
+                      email:
+                        - The email has already been taken.
+                      username:
+                        - The username has already been taken.
+                    success: false
+  /api/auth/login:
+    post:
+      summary: Login
+      description: Login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_user:
+                  type: string
+                  example: johndoe123
+                password:
+                  type: string
+                  example: "12345678"
+            example:
+              id_user: johndoe123
+              password: "12345678"
+      responses:
+        "200":
+          description: Success login
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:48:42 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        example: john_doe@mail.com
+                      id:
+                        type: string
+                        example: 9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4
+                      name:
+                        type: string
+                        example: John doe
+                      profile_photo_path:
+                        type: string
+                        example: http://127.0.0.1:8000/assets/img/profile/user.png
+                      role:
+                        type: string
+                        example: user
+                      username:
+                        type: string
+                        example: johndoe123
+                  message:
+                    type: string
+                    example: Logged in
+                  success:
+                    type: boolean
+                    example: true
+                  token:
+                    type: string
+                    example: 20|9GHYOrgv67bJtYU65sjqklk9NkQPjzWs5B2HKBlxaf8c02de
+                  token_type:
+                    type: string
+                    example: Bearer
+              examples:
+                Success login:
+                  value:
+                    data:
+                      email: john_doe@mail.com
+                      id: 9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4
+                      name: John doe
+                      profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                      role: user
+                      username: johndoe123
+                    message: Logged in
+                    success: true
+                    token: 20|9GHYOrgv67bJtYU65sjqklk9NkQPjzWs5B2HKBlxaf8c02de
+                    token_type: Bearer
+        "401":
+          description: "Error: credentials not match"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:48:01 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: These credentials do not match our records.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: credentials not match":
+                  value:
+                    message: These credentials do not match our records.
+                    success: false
+        "422":
+          description: "Error validation: input"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:46:28 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      id_user:
+                        type: array
+                        items:
+                          type: string
+                          example: The id user field is required.
+                        example:
+                          - The id user field is required.
+                      password:
+                        type: array
+                        items:
+                          type: string
+                          example: The password field is required.
+                        example:
+                          - The password field is required.
+                  message:
+                    type: string
+                    example: Validation error occurred.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error validation: input":
+                  value:
+                    errors:
+                      id_user:
+                        - The id user field is required.
+                      password:
+                        - The password field is required.
+                    message: Validation error occurred.
+                    success: false
+  /api/auth/logout:
+    post:
+      summary: Logout
+      description: Logout
+      operationId: logout
+      responses:
+        "200":
+          description: Success logout
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:42:23 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Logged out
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Success logout:
+                  value:
+                    message: Logged out
+                    success: true
+        "401":
+          description: "Error not login: no auth token"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:40:48 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Please Login [POST] /api/auth/login
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error not login: no auth token":
+                  value:
+                    message: Please Login [POST] /api/auth/login
+                    success: false
+  /api/auth/forgot-password:
+    post:
+      summary: Forgot password Link Send
+      description: Forgot password Link Send
+      operationId: forgotPasswordLinkSend
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john_doe@mail.com
+            example:
+              email: john_doe@mail.com
+      responses:
+        "200":
+          description: Success sent
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:52:01 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "3"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Password reset link sent successfully
+                  success:
+                    type: boolean
+                    example: true
+                  url_reset:
+                    type: string
+                    example: >-
+                      /api/auth/reset-password/?token=KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2&email=john_doe@mail.com
+              examples:
+                Success sent:
+                  value:
+                    message: Password reset link sent successfully
+                    success: true
+                    url_reset: >-
+                      /api/auth/reset-password/?token=KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2&email=john_doe@mail.com
+        "404":
+          description: "Error: User not found"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:56:45 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "5"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User not found
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: User not found":
+                  value:
+                    message: User not found
+                    success: false
+        "422":
+          description: "Error validation: input"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 13:50:05 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "5"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                          example: The email field is required.
+                        example:
+                          - The email field is required.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error validation: input":
+                  value:
+                    errors:
+                      email:
+                        - The email field is required.
+                    success: false
+  /api/auth/reset-password/:
+    post:
+      summary: Reset password
+      description: Reset password
+      operationId: resetPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john_doe@mail.com
+                password:
+                  type: string
+                  example: "12345678910"
+                password_confirmation:
+                  type: string
+                  example: "12345678910"
+                token:
+                  type: string
+                  example: KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2
+            example:
+              email: john_doe@mail.com
+              password: "12345678910"
+              password_confirmation: "12345678910"
+              token: KVQyh3lKRUSfOUITkI0vilIBxiReTueesFhQjAVloFOJebOfQKBDb3uYU2i2
+      responses:
+        "201":
+          description: Success password reset
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:03:16 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Your password has been reset.
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Success password reset:
+                  value:
+                    message: Your password has been reset.
+                    success: true
+        "400":
+          description: "Error: email invalid"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:02:56 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: We can't find a user with that email address.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: email invalid":
+                  value:
+                    message: We can't find a user with that email address.
+                    success: false
+        "422":
+          description: "Error validation: input"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:02:06 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        items:
+                          type: string
+                          example: The email field is required.
+                        example:
+                          - The email field is required.
+                      password:
+                        type: array
+                        items:
+                          type: string
+                          example: The password field is required.
+                        example:
+                          - The password field is required.
+                      token:
+                        type: array
+                        items:
+                          type: string
+                          example: The token field is required.
+                        example:
+                          - The token field is required.
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error validation: input":
+                  value:
+                    errors:
+                      email:
+                        - The email field is required.
+                      password:
+                        - The password field is required.
+                      token:
+                        - The token field is required.
+                    success: false
+  /api/auth/email/verification-notification:
+    post:
+      summary: Verification notification send
+      description: Verification notification send
+      operationId: verificationNotificationSend
+      responses:
+        "200":
+          description: Success sent email verif
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:05:33 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "5"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Verification link sent
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Success sent email verif:
+                  value:
+                    message: Verification link sent
+                    success: true
+        "401":
+          description: "Error: not auth token"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:03:59 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Please Login [POST] /api/auth/login
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: not auth token":
+                  value:
+                    message: Please Login [POST] /api/auth/login
+                    success: false
+  /api/auth/verify-email/{user_id}:
+    get:
+      summary: Verify account
+      description: "`/api/auth/verify-email/{id}/{hash}`"
+      operationId: verifyAccount
+      parameters:
+        - name: expires
+          in: query
+          schema:
+            type: string
+            example: ":epochDate"
+        - name: amp;signature
+          in: query
+          schema:
+            type: string
+            example: ""
+      responses:
+        "200":
+          description: Success verify
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:12:08 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "5"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email verified
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Success verify:
+                  value:
+                    message: Email verified
+                    success: true
+        "400":
+          description: "Error: email already verified"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:12:26 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                example: "6"
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                example: "4"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email already verified
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: email already verified":
+                  value:
+                    message: Email already verified
+                    success: false
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: ""
+  /api/v1/user:
+    get:
+      summary: Get My User
+      description: Get My User
+      operationId: getMyUser
+      responses:
+        "200":
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:15:19 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created_at:
+                    type: string
+                    example: "2024-10-13T13:40:19.000000Z"
+                  deleted_at:
+                    nullable: true
+                    example: null
+                  email:
+                    type: string
+                    example: john_doe@mail.com
+                  email_verified_at:
+                    type: string
+                    example: "2024-10-13T14:12:08.000000Z"
+                  id:
+                    type: string
+                    example: 9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4
+                  name:
+                    type: string
+                    example: John doe
+                  profile_photo_path:
+                    type: string
+                    example: /assets/img/profile/user.png
+                  role:
+                    type: string
+                    example: user
+                  updated_at:
+                    type: string
+                    example: "2024-10-13T14:12:08.000000Z"
+                  username:
+                    type: string
+                    example: johndoe123
+              examples:
+                Success:
+                  value:
+                    created_at: "2024-10-13T13:40:19.000000Z"
+                    deleted_at: null
+                    email: john_doe@mail.com
+                    email_verified_at: "2024-10-13T14:12:08.000000Z"
+                    id: 9d3c62d8-f9a7-4f57-99a2-ee3f480b3be4
+                    name: John doe
+                    profile_photo_path: /assets/img/profile/user.png
+                    role: user
+                    updated_at: "2024-10-13T14:12:08.000000Z"
+                    username: johndoe123
+        "401":
+          description: "Error: no auth token"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:15:39 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Please Login [POST] /api/auth/login
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: no auth token":
+                  value:
+                    message: Please Login [POST] /api/auth/login
+                    success: false
+  /api/v1/users:
+    get:
+      summary: Get Users
+      description: Get Users
+      operationId: getUsers
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        "200":
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:16:05 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          example: djohnson@example.com
+                        id:
+                          type: string
+                          example: 012167b9-a62d-39d9-870c-48934a08ae4b
+                        name:
+                          type: string
+                          example: Mr. Olaf Brekke
+                        profile_photo_path:
+                          type: string
+                          example: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role:
+                          type: string
+                          example: user
+                        username:
+                          type: string
+                          example: krystel19
+                    example:
+                      - email: djohnson@example.com
+                        id: 012167b9-a62d-39d9-870c-48934a08ae4b
+                        name: Mr. Olaf Brekke
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: krystel19
+                      - email: flossie.lehner@example.net
+                        id: 046a7fa4-8a4d-3aa5-8245-7238e52a2e2b
+                        name: Jermain Veum
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: tia48
+                      - email: heathcote.darwin@example.org
+                        id: 05df4310-a493-3c8b-86cf-9b10ec20d510
+                        name: Myrna Mills V
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: rbechtelar
+                      - email: imayer@example.net
+                        id: 074265cb-0eb5-33c8-8d77-6bfb19278281
+                        name: Aryanna Prohaska
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: willa.flatley
+                      - email: witting.josiane@example.net
+                        id: 094deb98-e237-3097-bfd4-0298515e7163
+                        name: Prof. Geovany Block
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: rswaniawski
+                      - email: igleason@example.net
+                        id: 0a105992-559b-3bf0-b78a-45c612fb417a
+                        name: Gayle Kerluke
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: jerod86
+                      - email: deven.hickle@example.com
+                        id: 0c5a543f-4560-34e6-83f5-aa7f6adab303
+                        name: Guy McGlynn Sr.
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: stracke.krista
+                      - email: mueller.bradley@example.net
+                        id: 0c914483-dc7c-39f6-acee-99c2f5809a52
+                        name: Modesta Hoeger
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: gusikowski.shane
+                      - email: dmaggio@example.net
+                        id: 0f602259-b5c1-36f5-9e1e-78dd59e75a1f
+                        name: Jayne Weissnat
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: nnicolas
+                      - email: crist.florian@example.net
+                        id: 1282167f-be84-3950-b84b-87e5532a94b7
+                        name: Jadyn Wiza
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: thurman.harber
+                      - email: swaniawski.colin@example.org
+                        id: 149cb084-1c35-33e1-baf1-f4eadad38a01
+                        name: Marcelina Rowe
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: damion.flatley
+                  message:
+                    type: string
+                    example: List of all users
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Success:
+                  value:
+                    data:
+                      - email: djohnson@example.com
+                        id: 012167b9-a62d-39d9-870c-48934a08ae4b
+                        name: Mr. Olaf Brekke
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: krystel19
+                      - email: flossie.lehner@example.net
+                        id: 046a7fa4-8a4d-3aa5-8245-7238e52a2e2b
+                        name: Jermain Veum
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: tia48
+                      - email: heathcote.darwin@example.org
+                        id: 05df4310-a493-3c8b-86cf-9b10ec20d510
+                        name: Myrna Mills V
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: rbechtelar
+                      - email: imayer@example.net
+                        id: 074265cb-0eb5-33c8-8d77-6bfb19278281
+                        name: Aryanna Prohaska
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: willa.flatley
+                      - email: witting.josiane@example.net
+                        id: 094deb98-e237-3097-bfd4-0298515e7163
+                        name: Prof. Geovany Block
+                        profile_photo_path: http://127.0.0.1:8000/assets/img/profile/user.png
+                        role: user
+                        username: rswaniawski
+                    message: List of all users
+                    success: true
+        "401":
+          description: "Error: no auth token"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Cache-Control:
+              schema:
+                type: string
+                example: no-cache, private
+            Connection:
+              schema:
+                type: string
+                example: close
+            Date:
+              schema:
+                type: string
+                example: Sun, 13 Oct 2024 14:16:30 GMT
+            Host:
+              schema:
+                type: string
+                example: 127.0.0.1:8000
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.2.17
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Please Login [POST] /api/auth/login
+                  success:
+                    type: boolean
+                    example: false
+              examples:
+                "Error: no auth token":
+                  value:
+                    message: Please Login [POST] /api/auth/login
+                    success: false
+tags: []
